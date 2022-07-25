@@ -83,6 +83,10 @@ public class PasswordApp extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][][][grow][][][][grow]", "[][][][][]"));
 		
+		
+		
+		
+		
 		//Components for password input
 		JLabel lblNewLabel_3 = new JLabel("What is the Password used for?:");
 		contentPane.add(lblNewLabel_3, "cell 1 1");
@@ -105,6 +109,12 @@ public class PasswordApp extends JFrame {
 		btnNewButton.setEnabled(true);
 		contentPane.add(btnNewButton, "cell 3 4");
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
+		
+		
+		
+		
+		
+		
 		
 		//Components for password search
 		JLabel service = new JLabel("What is the name?:");
@@ -147,6 +157,12 @@ public class PasswordApp extends JFrame {
 		contentPane.add(space4, "cell 1 6");
 		space4.setForeground(Color.GRAY);
 		
+		
+		
+		
+		
+		
+		
 		//Input Fields for input
 		textField_2 = new JTextField();
 		contentPane.add(textField_2, "cell 3 1,growx");
@@ -180,6 +196,12 @@ public class PasswordApp extends JFrame {
                    
             }    
          });    
+		
+		
+		
+		
+		
+		
 		
 		//Input Fields for search
 		textA = new JTextField();
@@ -228,6 +250,13 @@ public class PasswordApp extends JFrame {
 		
 		textA.addKeyListener(new CustomKeyListener2());
 		
+		
+		
+		
+		
+		
+		
+		
 		//Document listener for service field
 		class Used implements DocumentListener{
 				public void changedUpdate(DocumentEvent e) {
@@ -258,6 +287,11 @@ public class PasswordApp extends JFrame {
 			textField_2.getDocument().addDocumentListener(new Used());
 		
 				
+			
+			
+			
+			
+			
 			//Button 1 action
 			btnNewButton.addActionListener(new ActionListener() {
 			
@@ -313,7 +347,13 @@ public class PasswordApp extends JFrame {
 				}
 			}
 		});
-				//Document listener for textA
+				
+			
+			
+			
+			
+			
+			//Document listener for textA
 				class Empty implements DocumentListener{
 					public void changedUpdate(DocumentEvent e) {
 					    changed();
@@ -334,6 +374,12 @@ public class PasswordApp extends JFrame {
 				}
 			textA.getDocument().addDocumentListener(new Empty());
 						  
+			
+			
+			
+			
+			
+			
 			//Search Button action  
 			search.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
