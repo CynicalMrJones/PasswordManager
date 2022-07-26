@@ -292,7 +292,7 @@ public class PasswordApp extends JFrame {
 			
 			
 			
-			//Button 1 action
+			//Button to Save the file
 			btnNewButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -398,6 +398,7 @@ public class PasswordApp extends JFrame {
 					  }
 			}
 		});
+			//Delete Button
 			delete.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					DeleteEntry delete = new DeleteEntry();
