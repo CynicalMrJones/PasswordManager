@@ -2,7 +2,12 @@ package password.src;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PublicKey;
 import java.io.File;
+
+import javax.crypto.Cipher;
 import javax.swing.*;
 import java.awt.EventQueue;
 import java.awt.Color;
@@ -15,6 +20,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.event.ActionEvent;
 
 
@@ -45,17 +53,34 @@ public class PasswordApp extends JFrame {
 			    	UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 			    	PasswordApp frame = new PasswordApp();
 					frame.setVisible(true);
+					Encrypt startup = new Encrypt();
+					
+					
+					KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+					keyPairGen.initialize(4096);
+					KeyPair pair = keyPairGen.generateKeyPair();
+					PublicKey publicKey = pair.getPublic();
+					Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+					
+					
+					WindowListener exitListener = (WindowListener) new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+					        startup.doEncrypt(publicKey, pair, cipher );
+					    }
+					};
+					
+					
+					frame.addWindowListener(exitListener);
+					File create = new File("password.txt");
+					create.createNewFile();
+					userHomeDir = create.getAbsolutePath();
+					startup.doDecrypt(publicKey, pair, cipher);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				File create = new File("password.txt");
-				try {
-					create.createNewFile();
-					userHomeDir = create.getAbsolutePath();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+				
+
 				ReadFile file = new ReadFile();
 				storage = file.getService();
 				userName = file.getUsername();
@@ -72,7 +97,8 @@ public class PasswordApp extends JFrame {
 		setForeground(Color.DARK_GRAY);
 		setBackground(Color.WHITE);
 		setTitle("Juicys Password Manager");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		setBounds(100, 100, 500, 320);
 		setResizable(false);
 				
